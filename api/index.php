@@ -34,6 +34,13 @@ if (!isset($_REQUEST["user"])) {
 try {
     // get streak stats for user given in query string
     $user = preg_replace("/[^a-zA-Z0-9\-]/", "", $_REQUEST["user"]);
+
+    if ($user !== "Zi-Tao") {
+        http_response_code(302);
+        header("Location: https://vercel.com");
+        exit();
+    }
+
     $startingYear = isset($_REQUEST["starting_year"]) ? intval($_REQUEST["starting_year"]) : null;
     $contributionGraphs = getContributionGraphs($user, $startingYear);
     $contributions = getContributionDates($contributionGraphs);
